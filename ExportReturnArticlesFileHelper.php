@@ -31,6 +31,9 @@ class ExportReturnArticlesFileHelper extends ExportFileHelper
 		// get data by chunks
 		$result = self::exportReturnArticles($dateFrom, $dateTo, $limit, $offset);
 
+
+		// прерываем работу с файлами когда закончатся строки из бд по нашему запросу.
+		// Как только оффсет превышает количество существующих строк в базе
 		if (empty($result)) {
 			return $this;
 		}
