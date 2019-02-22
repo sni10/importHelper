@@ -43,20 +43,20 @@ class ExportReturnArticlesFileHelper extends ExportFileHelper
 
 		$this->chunkCounter = 0;
 
-		$fileName =  intval($offset) . '_' . (intval($offset) + $limit) .'_' . $dateFrom->format('Y-m-d_00:00:00') .'_' . $dateTo->format('Y-m-d_23:59:59') . '.csv';
+		$fileName = intval($offset) . '_' . (intval($offset) + $limit) . '_' . $dateFrom->format('Y-m-d_00:00:00') . '_' . $dateTo->format('Y-m-d_23:59:59') . '.csv';
 
 
 		// накидываем результат в файл, с периодическими вставками хедеров каждые 500 строк файла. Для удобство чтения "из коробки" если в файле млн строк
- 		while ( ( $this->chunkCounter * $this->chunkLimit ) <= count( $result ) ):
+		while (($this->chunkCounter * $this->chunkLimit) <= count($result)):
 
-			$resultChunk = array_slice( $result,$this->chunkCounter * $this->chunkLimit , $this->chunkLimit );
+			$resultChunk = array_slice($result, $this->chunkCounter * $this->chunkLimit, $this->chunkLimit);
 
-			array_unshift( $resultChunk, $headers );
+			array_unshift($resultChunk, $headers);
 
 
 			// никто не мешает заменить генерацию csv на xlsx используя любимую библиотеку
-	        // если PHPExcel то вероятно прийдется дописать какой нибудь garbache manager
-			$this->makeCsv( $resultChunk , $fileName, 'a+' );
+			// если PHPExcel то вероятно прийдется дописать какой нибудь garbage manager
+			$this->makeCsv($resultChunk, $fileName, 'a+');
 
 			$this->chunkCounter++;
 
@@ -65,7 +65,7 @@ class ExportReturnArticlesFileHelper extends ExportFileHelper
 		unset($result);
 
 		// обновляем лимит/офсет и рекурсим
-		$this->prepareExportReturnArticles($dateFrom, $dateTo, $limit+$offset);
+		$this->prepareExportReturnArticles($dateFrom, $dateTo, $limit + $offset);
 
 		return $this;
 
