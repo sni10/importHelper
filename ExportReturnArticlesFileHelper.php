@@ -55,6 +55,7 @@ class ExportReturnArticlesFileHelper extends ExportFileHelper
 
 
 			// никто не мешает заменить генерацию csv на xlsx используя любимую библиотеку
+	        // если PHPExcel то вероятно прийдется дописать какой нибудь garbache manager
 			$this->makeCsv( $resultChunk , $fileName, 'a+' );
 
 			$this->chunkCounter++;
